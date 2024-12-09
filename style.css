@@ -1,0 +1,156 @@
+body {
+    overflow: auto;
+}
+
+body ::-webkit-scrollbar {
+    display: none;
+}
+
+.card-loading {
+    position: relative;
+    opacity: 0.5;
+    /* Полупрозрачная карточка во время загрузки */
+}
+
+.card-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.checkbox-container:hover input~.checkmark {
+    border-color: rgb(239 68 68);
+}
+
+.checkbox-container input:checked~.checkmark {
+    background-color: rgb(220 38 38);
+    border-color: rgb(239 68 68);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked~.checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes progress {
+    to {
+        width: 0%;
+    }
+}
+
+.message-toast {
+    animation: slideIn 0.3s ease-out;
+}
+
+.progress-bar {
+    animation: progress 5s linear forwards;
+}
+
+
+.animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
